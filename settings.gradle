@@ -1,0 +1,7 @@
+rootProject.name = 'spring-fat-web'
+include 'gateway'
+include 'config'
+include 'logic'
+include 'discovery'
+include 'app'
+

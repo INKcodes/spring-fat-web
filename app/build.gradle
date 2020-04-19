@@ -1,0 +1,12 @@
+plugins {
+    id 'java'
+    id 'org.wildfly.build.provision' version '0.0.11'
+}
+
+repositories {
+    mavenCentral()
+}
+
+provision {
+    configuration = "app/custom-server-provisioning.xml"
+}

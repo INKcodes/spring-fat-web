@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-undertow'
+    // https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+}
+
+configurations {
+    // exclude Tomcat
+    compile.exclude module: 'spring-boot-starter-tomcat'
+}
+
+task deploy (dependsOn: war) {
+    copy {
+        from "build/libs"
+        into "../app/build/provisioned-wildfly/standalone/deployments"
+        include "*.war"
+    }
+}
